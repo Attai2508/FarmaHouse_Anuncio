@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+<title>Farmahouse | Promociones</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  overflow:hidden;
+
+  /* ===== FONDO PERSONALIZADO ===== */
+
+  background-image:
+  linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)),
+  url("https://i.imgur.com/iwQjpKv.jpeg");
+
+  background-size:cover;
+  background-position:center;
+  background-repeat:no-repeat;
+  background-attachment:fixed;
+
+  color:white;
+}
+
+/* ===== EFECTO PREMIUM ===== */
+
+body::before{
+  content:"";
+  position:fixed;
+  inset:0;
+
+  background:
+  radial-gradient(circle at top left, rgba(0,255,200,.12), transparent 25%),
+  radial-gradient(circle at bottom right, rgba(0,140,255,.18), transparent 25%);
+
+  z-index:-1;
+}
+
+/* ===== CONTENEDOR ===== */
+
+.contenedor{
+  width:100%;
+  height:100vh;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  position:relative;
+}
+
+/* ===== LOGO ===== */
+
+.logo{
+  width:450px;
+  z-index:5;
+  margin-bottom:10px;
+
+  filter:
+  drop-shadow(0 0 20px rgba(255,255,255,.35))
+  drop-shadow(0 0 40px rgba(0,255,200,.25));
+
+  animation:flotar 4s ease-in-out infinite;
+}
+
+@keyframes flotar{
+  50%{
+    transform:translateY(-8px);
+  }
+}
+
+/* ===== TITULO ===== */
+
+.titulo{
+  z-index:5;
+  font-size:55px;
+  font-weight:800;
+  text-align:center;
+  line-height:1.1;
+  margin-bottom:20px;
+  text-transform:uppercase;
+
+  background:linear-gradient(to right,#ffffff,#6fffd2);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+
+  text-shadow:0 0 20px rgba(255,255,255,.2);
+}
+
+.titulo span{
+  -webkit-text-fill-color:#6fffd2;
+}
+
+/* ===== SLIDER ===== */
+
+.slider{
+  width:95%;
+  height:70vh;
+  border-radius:35px;
+  position:relative;
+  overflow:hidden;
+  z-index:2;
+
+  background:rgba(255,255,255,.08);
+
+  backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);
+
+  border:1px solid rgba(255,255,255,.18);
+
+  box-shadow:
+  0 10px 50px rgba(0,0,0,.45),
+  inset 0 0 30px rgba(255,255,255,.05),
+  0 0 35px rgba(0,255,200,.08);
+}
+
+/* ===== SLIDES ===== */
+
+.slide{
+  position:absolute;
+  width:100%;
+  height:100%;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  padding:50px;
+
+  opacity:0;
+  transform:scale(1.05);
+
+  transition:1s ease;
+}
+
+.slide.active{
+  opacity:1;
+  transform:scale(1);
+}
+
+/* ===== IMAGEN PRODUCTO ===== */
+
+.producto-img{
+  width:42%;
+  height:90%;
+  object-fit:contain;
+
+  filter:
+  drop-shadow(0 20px 35px rgba(0,0,0,.45))
+  drop-shadow(0 0 25px rgba(255,255,255,.15));
+
+  animation:productoFloat 4s ease-in-out infinite;
+}
+
+@keyframes productoFloat{
+  50%{
+    transform:translateY(-10px);
+  }
+}
+
+/* ===== INFO ===== */
+
+.info{
+  width:48%;
+}
+
+.tag{
+  display:inline-block;
+
+  background:linear-gradient(90deg,#00ffc8,#00b7ff);
+
+  color:#00293d;
+  font-weight:700;
+
+  padding:10px 22px;
+  border-radius:50px;
+
+  margin-bottom:20px;
+  font-size:18px;
+
+  box-shadow:0 0 20px rgba(0,255,200,.35);
+}
+
+.info h2{
+  font-size:65px;
+  line-height:1;
+  margin-bottom:20px;
+  font-weight:800;
+}
+
+.descripcion{
+  font-size:26px;
+  color:#d8f4ff;
+  margin-bottom:25px;
+  line-height:1.5;
+}
+
+.precio{
+  font-size:85px;
+  font-weight:800;
+  color:#6fffd2;
+  margin-bottom:20px;
+
+  text-shadow:0 0 25px rgba(111,255,210,.4);
+}
+
+.precio span{
+  font-size:35px;
+}
+
+.oferta{
+  display:inline-block;
+
+  padding:16px 35px;
+  border-radius:18px;
+  font-size:28px;
+  font-weight:700;
+
+  background:linear-gradient(90deg,#ff2d55,#ff6b00);
+
+  color:white;
+
+  box-shadow:
+  0 0 25px rgba(255,80,80,.45),
+  0 10px 25px rgba(0,0,0,.25);
+
+  animation:pulse 1.5s infinite;
+}
+
+@keyframes pulse{
+  50%{
+    transform:scale(1.06);
+  }
+}
+
+/* ===== QR ===== */
+
+.qr-box{
+  position:absolute;
+  bottom:25px;
+  right:25px;
+  z-index:20;
+
+  background:rgba(255,255,255,.08);
+
+  border:1px solid rgba(255,255,255,.15);
+
+  padding:15px;
+  border-radius:22px;
+
+  text-align:center;
+
+  backdrop-filter:blur(18px);
+  -webkit-backdrop-filter:blur(18px);
+
+  box-shadow:
+  0 0 30px rgba(0,0,0,.35),
+  inset 0 0 20px rgba(255,255,255,.04);
+}
+
+.qr-box img{
+  width:140px;
+  height:140px;
+
+  background:white;
+
+  padding:8px;
+  border-radius:14px;
+}
+
+.qr-box p{
+  margin-top:10px;
+  font-size:15px;
+}
+
+/* ===== TEXTO ===== */
+
+.extra{
+  position:absolute;
+  bottom:25px;
+  left:40px;
+
+  font-size:18px;
+
+  color:rgba(255,255,255,.82);
+
+  z-index:5;
+}
+
+.extra strong{
+  color:#6fffd2;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media(max-width:950px){
+
+  .logo{
+    width:280px;
+  }
+
+  .titulo{
+    font-size:34px;
+  }
+
+  .slide{
+    flex-direction:column;
+    justify-content:center;
+    text-align:center;
+    padding:20px;
+  }
+
+  .producto-img{
+    width:70%;
+    height:40%;
+    margin-bottom:20px;
+  }
+
+  .info{
+    width:100%;
+  }
+
+  .info h2{
+    font-size:42px;
+  }
+
+  .precio{
+    font-size:60px;
+  }
+
+  .descripcion{
+    font-size:20px;
+  }
+
+  .oferta{
+    font-size:22px;
+  }
+
+  .qr-box{
+    bottom:10px;
+    right:10px;
+  }
+
+  .qr-box img{
+    width:90px;
+    height:90px;
+  }
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="contenedor">
+
+<!-- ===== LOGO ===== -->
+
+<img src="https://i.imgur.com/PqWrOKD.png" class="logo">
+
+<!-- ===== TITULO ===== -->
+
+<h1 class="titulo">
+Las Mejores <span>Promociones</span><br>
+Para Tu Farmacia
+</h1>
+
+<!-- ===== SLIDER ===== -->
+
+<div class="slider">
+
+<!-- PRODUCTO 1 -->
+<div class="slide active">
+<img src="https://i.imgur.com/vMCq1eK.png" class="producto-img">
+
+<div class="info">
+<div class="tag">⭐ DESTACADO</div>
+
+<h2>Paracetamol</h2>
+
+<div class="descripcion">
+Alivio rápido y efectivo para dolor y fiebre.
+</div>
+
+<div class="precio">
+<span>Solo</span> $49
+</div>
+
+<div class="oferta">
+OFERTA ESPECIAL
+</div>
+</div>
+</div>
+
+<!-- PRODUCTO 2 -->
+<div class="slide">
+<img src="https://i.imgur.com/VXU7xox.png" class="producto-img">
+
+<div class="info">
+<div class="tag">🔥 MÁS VENDIDO</div>
+
+<h2>Vitamina C</h2>
+
+<div class="descripcion">
+Refuerza tus defensas y mejora tu energía diaria.
+</div>
+
+<div class="precio">
+<span>Desde</span> $89
+</div>
+
+<div class="oferta">
+2x1
+</div>
+</div>
+</div>
+
+<!-- PRODUCTO 3 -->
+<div class="slide">
+<img src="https://i.imgur.com/YkD6Lzo.png" class="producto-img">
+
+<div class="info">
+<div class="tag">💥 DESCUENTO</div>
+
+<h2>Gel Antibacterial</h2>
+
+<div class="descripcion">
+Protección instantánea para toda la familia.
+</div>
+
+<div class="precio">
+<span>Solo</span> $35
+</div>
+
+<div class="oferta">
+30% OFF
+</div>
+</div>
+</div>
+
+<!-- PRODUCTO 4 -->
+<div class="slide">
+<img src="https://i.imgur.com/vMCq1eK.png" class="producto-img">
+
+<div class="info">
+<div class="tag">🛒 PROMOCIÓN</div>
+
+<h2>Ibuprofeno</h2>
+
+<div class="descripcion">
+Reduce dolor muscular, inflamación y fiebre rápidamente.
+</div>
+
+<div class="precio">
+<span>Solo</span> $65
+</div>
+
+<div class="oferta">
+PRECIO ESPECIAL
+</div>
+</div>
+</div>
+
+<!-- PRODUCTO 5 -->
+<div class="slide">
+<img src="https://i.imgur.com/VXU7xox.png" class="producto-img">
+
+<div class="info">
+<div class="tag">⭐ FAVORITO</div>
+
+<h2>Omeprazol</h2>
+
+<div class="descripcion">
+Ayuda a aliviar la acidez y el reflujo estomacal.
+</div>
+
+<div class="precio">
+<span>Solo</span> $79
+</div>
+
+<div class="oferta">
+SUPER OFERTA
+</div>
+</div>
+</div>
+
+<!-- PRODUCTO 6 -->
+<div class="slide">
+<img src="https://i.imgur.com/YkD6Lzo.png" class="producto-img">
+
+<div class="info">
+<div class="tag">🔥 MÁS VENDIDO</div>
+
+<h2>Alcohol Antiséptico</h2>
+
+<div class="descripcion">
+Desinfección segura y efectiva para uso diario.
+</div>
+
+<div class="precio">
+<span>Solo</span> $29
+</div>
+
+<div class="oferta">
+AHORRA MÁS
+</div>
+</div>
+</div>
+
+<!-- PRODUCTO 7 -->
+<div class="slide">
+<img src="https://i.imgur.com/vMCq1eK.png" class="producto-img">
+
+<div class="info">
+<div class="tag">💚 FARMAHOUSE</div>
+
+<h2>Jarabe Infantil</h2>
+
+<div class="descripcion">
+Alivio suave y efectivo para la tos infantil.
+</div>
+
+<div class="precio">
+<span>Solo</span> $95
+</div>
+
+<div class="oferta">
+DESCUENTO
+</div>
+</div>
+</div>
+
+<!-- PRODUCTO 8 -->
+<div class="slide">
+<img src="https://i.imgur.com/VXU7xox.png" class="producto-img">
+
+<div class="info">
+<div class="tag">⭐ DESTACADO</div>
+
+<h2>Protector Solar</h2>
+
+<div class="descripcion">
+Protección avanzada contra rayos UV.
+</div>
+
+<div class="precio">
+<span>Solo</span> $120
+</div>
+
+<div class="oferta">
+2x1
+</div>
+</div>
+</div>
+
+<!-- PRODUCTO 9 -->
+<div class="slide">
+<img src="https://i.imgur.com/YkD6Lzo.png" class="producto-img">
+
+<div class="info">
+<div class="tag">🔥 PROMO</div>
+
+<h2>Curitas</h2>
+
+<div class="descripcion">
+Protección cómoda para heridas pequeñas.
+</div>
+
+<div class="precio">
+<span>Solo</span> $25
+</div>
+
+<div class="oferta">
+LIQUIDACIÓN
+</div>
+</div>
+</div>
+
+<!-- PRODUCTO 10 -->
+<div class="slide">
+<img src="https://i.imgur.com/vMCq1eK.png" class="producto-img">
+
+<div class="info">
+<div class="tag">💥 OFERTA</div>
+
+<h2>Termómetro Digital</h2>
+
+<div class="descripcion">
+Medición rápida y precisa de temperatura.
+</div>
+
+<div class="precio">
+<span>Solo</span> $149
+</div>
+
+<div class="oferta">
+SUPER PRECIO
+</div>
+</div>
+</div>
+
+<!-- PRODUCTOS 11 AL 20 -->
+<!-- DUPLICADOS PREMIUM -->
+
+<div class="slide">
+<img src="https://i.imgur.com/VXU7xox.png" class="producto-img">
+<div class="info">
+<div class="tag">🛒 OFERTA</div>
+<h2>Vitamina D</h2>
+<div class="descripcion">Fortalece huesos y sistema inmunológico.</div>
+<div class="precio"><span>Solo</span> $99</div>
+<div class="oferta">PRECIO BAJO</div>
+</div>
+</div>
+
+<div class="slide">
+<img src="https://i.imgur.com/YkD6Lzo.png" class="producto-img">
+<div class="info">
+<div class="tag">⭐ NUEVO</div>
+<h2>Suero Oral</h2>
+<div class="descripcion">Hidratación rápida y efectiva.</div>
+<div class="precio"><span>Solo</span> $39</div>
+<div class="oferta">PROMOCIÓN</div>
+</div>
+</div>
+
+<div class="slide">
+<img src="https://i.imgur.com/vMCq1eK.png" class="producto-img">
+<div class="info">
+<div class="tag">🔥 TOP</div>
+<h2>Antigripal</h2>
+<div class="descripcion">Combate síntomas de gripe y resfriado.</div>
+<div class="precio"><span>Solo</span> $89</div>
+<div class="oferta">DESCUENTO</div>
+</div>
+</div>
+
+<div class="slide">
+<img src="https://i.imgur.com/VXU7xox.png" class="producto-img">
+<div class="info">
+<div class="tag">💚 SALUD</div>
+<h2>Mascarillas</h2>
+<div class="descripcion">Protección cómoda para uso diario.</div>
+<div class="precio"><span>Solo</span> $59</div>
+<div class="oferta">3x2</div>
+</div>
+</div>
+
+<div class="slide">
+<img src="https://i.imgur.com/YkD6Lzo.png" class="producto-img">
+<div class="info">
+<div class="tag">💥 OFERTA</div>
+<h2>Shampoo Medicado</h2>
+<div class="descripcion">Cuidado especializado para el cuero cabelludo.</div>
+<div class="precio"><span>Solo</span> $129</div>
+<div class="oferta">SUPER OFERTA</div>
+</div>
+</div>
+
+<div class="slide">
+<img src="https://i.imgur.com/vMCq1eK.png" class="producto-img">
+<div class="info">
+<div class="tag">⭐ RECOMENDADO</div>
+<h2>Crema Corporal</h2>
+<div class="descripcion">Hidratación profunda para tu piel.</div>
+<div class="precio"><span>Solo</span> $85</div>
+<div class="oferta">PROMOCIÓN</div>
+</div>
+</div>
+
+<div class="slide">
+<img src="https://i.imgur.com/VXU7xox.png" class="producto-img">
+<div class="info">
+<div class="tag">🔥 OFERTA</div>
+<h2>Multivitamínico</h2>
+<div class="descripcion">Vitaminas esenciales para tu día.</div>
+<div class="precio"><span>Solo</span> $139</div>
+<div class="oferta">2x1</div>
+</div>
+</div>
+
+<div class="slide">
+<img src="https://i.imgur.com/YkD6Lzo.png" class="producto-img">
+<div class="info">
+<div class="tag">💚 CUIDADO</div>
+<h2>Pasta Dental</h2>
+<div class="descripcion">Limpieza y frescura para toda la familia.</div>
+<div class="precio"><span>Solo</span> $45</div>
+<div class="oferta">AHORRA MÁS</div>
+</div>
+</div>
+
+<div class="slide">
+<img src="https://i.imgur.com/vMCq1eK.png" class="producto-img">
+<div class="info">
+<div class="tag">⭐ TOP</div>
+<h2>Toallas Húmedas</h2>
+<div class="descripcion">Limpieza rápida y suave.</div>
+<div class="precio"><span>Solo</span> $55</div>
+<div class="oferta">SUPER PRECIO</div>
+</div>
+</div>
+
+<div class="slide">
+<img src="https://i.imgur.com/VXU7xox.png" class="producto-img">
+<div class="info">
+<div class="tag">🔥 FINAL</div>
+<h2>Agua Oxigenada</h2>
+<div class="descripcion">Ideal para limpieza y desinfección.</div>
+<div class="precio"><span>Solo</span> $30</div>
+<div class="oferta">DESCUENTO FINAL</div>
+</div>
+</div>
+
+</div>
+
+<!-- ===== QR ===== -->
+
+<div class="qr-box">
+<img src="https://i.imgur.com/soBRJ1F.png">
+<p>Escanea el QR</p>
+</div>
+
+<!-- ===== TEXTO ===== -->
+
+<div class="extra">
+💚 En <strong>Farmahouse</strong> cuidamos tu salud y tu bolsillo.
+</div>
+
+</div>
+
+<script>
+
+const slides = document.querySelectorAll(".slide");
+
+let index = 0;
+
+function cambiarSlide(){
+
+  slides[index].classList.remove("active");
+
+  index++;
+
+  if(index >= slides.length){
+    index = 0;
+  }
+
+  slides[index].classList.add("active");
+
+}
+
+setInterval(cambiarSlide,5000);
+
+</script>
+
+</body>
+</html>
